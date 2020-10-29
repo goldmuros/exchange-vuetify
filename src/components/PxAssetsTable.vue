@@ -12,7 +12,12 @@
       <b>#{{ item.ranking }}</b>
     </template>
     <template v-slot:[`item.name`]="{ item }">
-      <span>{{ item.name }}</span>
+      <router-link
+        class="green--text text-decoration"
+        :to="{ name: 'coin-detail', params: { id: item.id } }"
+      >
+        {{ item.name }}
+      </router-link>
       <small class="ml-1 orange--text">{{ item.symbol }}</small>
     </template>
     <template v-slot:[`item.price`]="{ item }">
@@ -27,6 +32,16 @@
       >
         {{ item.variation24hs | percent }}
       </span>
+    </template>
+    <template v-slot:[`item.input`]="{ item }">
+      <v-btn
+        class="white--text"
+        color="green"
+        elevation="4"
+        @click="goToCoin(item.id)"
+      >
+        Detalle
+      </v-btn>
     </template>
   </v-data-table>
 </template>
@@ -52,13 +67,11 @@ export default {
         { text: "", align: "end", value: "input" }
       ]
     };
+  },
+  methods: {
+    goToCoin(id) {
+      this.$router.push({ name: "coin-detail", params: { id } });
+    }
   }
 };
 </script>
-
-<style scoped>
-.imagen {
-  max-width: 20;
-  max-height: 20;
-}
-</style>

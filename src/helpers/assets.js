@@ -18,4 +18,16 @@ const tableAssetsFormat = assetsOrigin => {
   return assets;
 };
 
-export { tableAssetsFormat };
+const assetFormat = asset => {
+  return {
+    icon: `https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`,
+    ranking: asset.rank,
+    name: asset.name,
+    price: asset.priceUsd,
+    symbol: asset.symbol,
+    cap_market: asset.marketCapUsd,
+    variation24hs: asset.changePercent24Hr
+  };
+};
+
+export { tableAssetsFormat, assetFormat };
